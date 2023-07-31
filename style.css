@@ -149,4 +149,7 @@ rem
 }
 .sidebar-link:hover, .sidebar-link:hover i, .sidebar-link:hover svg {
     color: rgba(233,236,239,.75);
+    color: rgba(233,236,239,.5);
 }
+
+
