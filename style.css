@@ -24,7 +24,98 @@
     border-bottom: 0;
     box-shadow: 0 0 2rem 0 rgba(33,37,41,.1);
 }
-.navbar-expand {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+
+.sidebar-toggle {
+    margin-right: 1rem;
+}
+.sidebar-toggle {
+    cursor: pointer;
+    display: flex;
+    height: 26px;
+    width: 26px;
+}
+
+.hamburger {
+    position: relative;
+}
+
+.hamburger, .hamburger:after, .hamburger:before {
+    background: #495057;
+    border-radius: 1px;
+    content: "";
+    cursor: pointer;
+    display: block;
+    height: 3px;
+    transition: background .1s ease-in-out,color .1s ease-in-out;
+    width: 24px;
+}
+.hamburger:before {
+    position: absolute;
+    top: -7.5px;
+    width: 24px;
+}
+.hamburger:after {
+    bottom: -7.5px;
+    position: absolute;
+    width: 16px;
+}
+
+.navbar-align {
+    margin-left: auto;
+}
+.navbar-nav {
+    direction: ltr;
+}
+
+.nav-flag, .nav-icon {
+    color: #6c757d;
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    padding: 0.1rem 0.8rem;
+    transition: background .1s ease-in-out,color .1s ease-in-out;
+}
+
+.nav-flag .feather, .nav-flag svg, .nav-icon .feather, .nav-icon svg {
+    height: 20px;
+    width: 20px;
+}
+.feather {
+    stroke-width: 2;
+    height: 18px;
+    width: 18px;
+}
+
+.navbar .avatar {
+    margin-bottom: -15px;
+    margin-top: -15px;
+}
+.avatar {
+    height: 40px;
+    width: 40px;
+}
+
+.img-fluid, .img-thumbnail {
+    height: auto;
+    max-width: 100%;
+}
+
+.dropdown-toggle:after {
+    border: solid;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2px;
+    transform: rotate(45deg);
+}
+
+.navbar-nav .dropdown-menu {
+    box-shadow: 0 0.1rem 0.2rem rgba(0,0,0,.05);
+}
+
+.dropdown-menu {
+    top: auto;
+}
+
+.dropdown-item {
+    transition: background .1s ease-in-out,color .1s ease-in-out;
 }
