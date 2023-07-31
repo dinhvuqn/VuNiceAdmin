@@ -17,3 +17,14 @@
     transition: margin-left .35s ease-in-out,left .35s ease-in-out,margin-right .35s ease-in-out,right .35s ease-in-out;
     width: 100%;
 }
+.navbar-bg {
+    background: #fff;
+}
+.navbar {
+    border-bottom: 0;
+    box-shadow: 0 0 2rem 0 rgba(33,37,41,.1);
+}
+.navbar-expand {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
