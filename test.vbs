@@ -1,3 +1,5 @@
+regsvr32 c:\windows\syswow64\msscript.ocx
+
 Dim jsonStr
 Dim jsonObj
 Dim jsonConverter
