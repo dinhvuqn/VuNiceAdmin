@@ -18,6 +18,13 @@ If Not IsEmpty(jsonStr) Then
     WScript.Echo "Name: " & jsonObj("name")
     WScript.Echo "Age: " & jsonObj("age")
     WScript.Echo "City: " & jsonObj("city")
+
+		jsonObj("age") = 33
+	jsonObj("isOpening") = True
+	
+
+    ' Write the updated JSON back to the file
+    UpdateJsonFile jsonFile, jsonObj
 Else
     WScript.Echo "Error reading the JSON file."
 End If
@@ -75,4 +82,64 @@ Function JsonConverter(json)
 
     ' Return the dictionary
     Set JsonConverter = dict
+End Function
+Function UpdateJsonFile(filePath, jsonDict)
+    ' Function to update a JSON file with a given dictionary while preserving structure
+    Dim objFSO, objFile
+
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+    ' Check if the file exists
+    If objFSO.FileExists(filePath) Then
+        ' Open the file for writing
+        Set objFile = objFSO.OpenTextFile(filePath, 2) ' 2 means open for writing
+
+        ' Convert the dictionary back to a formatted JSON string
+        Dim updatedJsonStr
+        updatedJsonStr = JsonToFormattedString(jsonDict, 0)
+
+        ' Write the updated JSON string to the file
+        objFile.Write updatedJsonStr
+
+        ' Close the file
+        objFile.Close
+    Else
+        WScript.Echo "Error: File does not exist."
+    End If
+End Function
+
+Function JsonToFormattedString(jsonDict, indentLevel)
+    ' Function to convert a JSON dictionary to a formatted string
+    Dim jsonString
+    jsonString = "{"
+
+    For Each key In jsonDict.Keys
+        jsonString = jsonString & vbCrLf & Space(indentLevel + 2) & """" & key & """: "
+
+        If IsObject(jsonDict(key)) Then
+            jsonString = jsonString & JsonToFormattedString(jsonDict(key), indentLevel + 2) & ","
+        Else
+		msgbox jsonDict(key)
+            jsonString = jsonString & JsonValueToString(jsonDict(key)) & ","
+        End If
+    Next
+
+    ' Remove the trailing comma and add line break and indentation
+    If Right(jsonString, 1) = "," Then
+        jsonString = Left(jsonString, Len(jsonString) - 1) & vbCrLf & Space(indentLevel)
+    End If
+
+    jsonString = jsonString & "}" & vbCrLf
+
+    JsonToFormattedString = jsonString
+End Function
+
+Function JsonValueToString(value)
+	msgbox value & "--" & TypeName(value)
+    ' Function to convert a JSON value to its string representation
+    If IsNumeric(value) Or VarType(value) = 11 Then
+        JsonValueToString = CStr(value)
+    Else
+        JsonValueToString = """" & Replace(CStr(value), """", "\""") & """"
+    End If
 End Function
