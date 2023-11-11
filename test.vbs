@@ -1,20 +1,18 @@
-regsvr32 c:\windows\syswow64\msscript.ocx
+Function ParseJson(json)
+    Dim objJSON
+    Set objJSON = CreateObject("MSXML2.DOMDocument.6.0")
+    objJSON.LoadXml json
+    Set ParseJson = objJSON
+End Function
 
+' Example usage
 Dim jsonStr
 Dim jsonObj
 
-' Your JSON string
 jsonStr = "{""name"": ""John"", ""age"": 30, ""city"": ""New York""}"
-
-' Create a ScriptControl object
-Set scriptControl = CreateObject("MSScriptControl.ScriptControl")
-scriptControl.Language = "JScript"  ' Use JScript to handle JSON
-
-' Use eval to parse the JSON string and create a JavaScript object
-Set jsonObj = scriptControl.Eval("(" & jsonStr & ")")
+Set jsonObj = ParseJson(jsonStr)
 
 ' Access the properties of the resulting object
-WScript.Echo "Name: " & jsonObj.name
-WScript.Echo "Age: " & jsonObj.age
-WScript.Echo "City: " & jsonObj.city
-
+WScript.Echo "Name: " & jsonObj.SelectSingleNode("//name").Text
+WScript.Echo "Age: " & jsonObj.SelectSingleNode("//age").Text
+WScript.Echo "City: " & jsonObj.SelectSingleNode("//city").Text
