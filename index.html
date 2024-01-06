@@ -1,29 +1,18 @@
 import chardet
-import codecs
 
-def detect_encoding(file_path):
-    with open(file_path, 'rb') as file:
-        raw_data = file.read()
-        result = chardet.detect(raw_data)
-        return result['encoding']
+def convert_ansi_to_shiftjis(input_file, output_file):
+    # Detect the encoding of the ANSI file
+    with open(input_file, 'rb') as f:
+        result = chardet.detect(f.read())
 
-def convert_to_shiftjis(input_file, output_file):
-    input_encoding = detect_encoding(input_file)
+    # Open the ANSI file with the detected encoding and convert it to Shift JIS
+    with open(input_file, 'r', encoding=result['encoding']) as f:
+        ansi_content = f.read()
 
-    # Mở file đầu vào ở chế độ đọc với encoding được xác định tự động
-    with codecs.open(input_file, 'r', encoding=input_encoding) as input_file_content:
+    # Write the content to the output file with Shift JIS encoding
+    with open(output_file, 'w', encoding='shift_jis') as f:
+        f.write(ansi_content)
 
-        # Đọc nội dung từ file đầu vào
-        content = input_file_content.read()
-
-        # Mở file đầu ra ở chế độ ghi bằng shift-jis
-        with codecs.open(output_file, 'w', encoding='shift-jis') as output_file_shiftjis:
-            
-            # Ghi nội dung đã đọc vào file đầu ra
-            output_file_shiftjis.write(content)
-
-input_file = 'file_utf8.txt'
-output_file = 'file_shiftjis.txt'
-
-convert_to_shiftjis(input_file, output_file)
-print(f"Chuyển đổi từ UTF-8 sang Shift-JIS thành công. Đã lưu vào '{output_file}'.")
+# Replace 'input.txt' with the path to your ANSI-encoded file
+# Replace 'output_shiftjis.txt' with the desired output file name
+convert_ansi_to_shiftjis('input.txt', 'output_shiftjis.txt')
