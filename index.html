@@ -1,18 +1,8 @@
-import chardet
+with open('input.txt', 'r', encoding='utf-8') as utf8_file:
+    content = utf8_file.read()
 
-def convert_ansi_to_shiftjis(input_file, output_file):
-    # Detect the encoding of the ANSI file
-    with open(input_file, 'rb') as f:
-        result = chardet.detect(f.read())
+with open('output.txt', 'w', encoding='shift_jis') as shiftjis_file:
+    shiftjis_file.write(content)
 
-    # Open the ANSI file with the detected encoding and convert it to Shift JIS
-    with open(input_file, 'r', encoding=result['encoding']) as f:
-        ansi_content = f.read()
 
-    # Write the content to the output file with Shift JIS encoding
-    with open(output_file, 'w', encoding='shift_jis') as f:
-        f.write(ansi_content)
-
-# Replace 'input.txt' with the path to your ANSI-encoded file
-# Replace 'output_shiftjis.txt' with the desired output file name
-convert_ansi_to_shiftjis('input.txt', 'output_shiftjis.txt')
+Get-Content -Encoding UTF8 input.txt | Out-File -Encoding ShiftJis output.txt
