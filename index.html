@@ -1,8 +1,12 @@
-with open('input.txt', 'r', encoding='utf-8') as utf8_file:
-    content = utf8_file.read()
+def add_shift_jis_character(file_path, character):
+    try:
+        with open(file_path, 'ab') as file:
+            file.write(character.encode('shift-jis'))
+        print(f"The character '{character}' has been added to the file.")
+    except Exception as e:
+        print(f"Error: {e}")
 
-with open('output.txt', 'w', encoding='shift_jis') as shiftjis_file:
-    shiftjis_file.write(content)
+file_path = 'path/to/your/file.txt'
+character_to_add = 'あ'  # Thay đổi ký tự cần thêm
 
-
-Get-Content -Encoding UTF8 input.txt | Out-File -Encoding ShiftJis output.txt
+add_shift_jis_character(file_path, character_to_add)
