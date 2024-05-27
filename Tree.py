@@ -16,3 +16,4 @@ def close_alert(hwnd):
 hwnd_alert = 527214  # Thay thế bằng handle thực của cửa sổ alert
 close_alert(hwnd_alert)
 #https://pypi.org/project/pywinauto/0.6.8/#files
+#https://pypi.org/project/comtypes/#files
